@@ -1,7 +1,7 @@
 import { IFlashcard } from "./IFlashcard";
 
 export interface ICardsCollection {
-  id: number;
+  id: string;
   name: string;
   description: string;
   cards: IFlashcard[];

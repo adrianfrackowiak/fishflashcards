@@ -1,16 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { HomeComponent } from "../components/Home";
 
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Fish Flashards</title>
+        <title>Fish Flashcards</title>
         <meta name="description" content="Flashcards" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Flashcards</h1>
+      <HomeComponent />
     </div>
   );
 };
