@@ -30,7 +30,9 @@ export const Halfway = () => {
         learnData.learnMode.cardsLength === learnData.learnMode.cardIndex && (
           <div className="max-w-3xl w-full mx-auto flex items-center justify-center mb-10">
             <div className="relative aspect-[12/8] w-full h-full bg-white flex flex-col items-center justify-center rounded-md border border-gray-200 p-10">
-              <h4 className="text-xl font-semibold">You're halfway there!</h4>
+              <h4 className="text-xl font-semibold">
+                You&apos;re halfway there!
+              </h4>
               <p>
                 You just learnt {learnData.learnMode.gotItList.length} terms!
                 Keep practising to master the remaining{" "}

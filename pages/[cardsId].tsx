@@ -26,7 +26,7 @@ const CardsPage: NextPage<Props> = ({ collections }) => {
     if (collections) {
       dispatch(setState(collections));
     }
-  }, [collections]);
+  }, [collections, dispatch]);
 
   useEffect(() => {
     const collection = data.cards.filter((val) => {
@@ -42,7 +42,7 @@ const CardsPage: NextPage<Props> = ({ collections }) => {
         setLoading(false);
       }
     }
-  }, [data]);
+  }, [data, dispatch, pageId, router]);
 
   if (loading) return <Loading />;
 

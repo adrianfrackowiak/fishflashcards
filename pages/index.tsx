@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ collections }) => {
       dispatch(setState(collections));
       setLoading(false);
     }
-  }, [collections]);
+  }, [collections, dispatch]);
 
   if (loading) return <Loading />;
 
