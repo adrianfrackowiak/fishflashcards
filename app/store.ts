@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { currentcollectionSlice } from "./features/currentcollectionSlice";
-import { flashcardsSlice } from "./features/flashcardsSlice";
+import { currentcollectionSlice } from "./features/currentCardsCollectionSlice";
+import { flashcardsSlice } from "./features/allCardsDataSlice";
+import { learnModeSlice } from "./features/learnModeSlice";
 
 export const store = configureStore({
   reducer: {
     cards: flashcardsSlice.reducer,
     current: currentcollectionSlice.reducer,
+    learnMode: learnModeSlice.reducer,
   },
 });
 

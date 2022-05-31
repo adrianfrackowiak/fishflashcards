@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
+import type { RootState } from "../store";
 import { FlashCardsData } from "../data/flashcards";
 import { ICardsCollection } from "../interfaces/ICardsCollection";
 
@@ -8,7 +8,7 @@ interface FlashcardsState {
 }
 
 const initialState = {
-  cards: FlashCardsData,
+  cards: [],
 } as FlashcardsState;
 
 export const flashcardsSlice = createSlice({
@@ -26,7 +26,6 @@ export const flashcardsSlice = createSlice({
 
 export const { setState } = flashcardsSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const cardsState = (state: RootState) => state.cards;
 
 export default flashcardsSlice.reducer;

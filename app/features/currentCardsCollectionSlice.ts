@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
+import type { RootState } from "../store";
 import { ICardsCollection } from "../interfaces/ICardsCollection";
 
 interface currentcollectionState {
@@ -30,7 +30,6 @@ export const currentcollectionSlice = createSlice({
 
 export const { setCurrentState } = currentcollectionSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const currentState = (state: RootState) => state.current;
 
 export default currentcollectionSlice.reducer;

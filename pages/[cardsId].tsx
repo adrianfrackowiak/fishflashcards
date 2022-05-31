@@ -1,34 +1,50 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentState } from "../app/features/currentcollectionSlice";
-import { cardsState } from "../app/features/flashcardsSlice";
+import { setCurrentState } from "../app/features/currentCardsCollectionSlice";
+import { cardsState, setState } from "../app/features/allCardsDataSlice";
 import { CardsComponent } from "../components/Cards";
+import { Loading } from "../components/Loading";
+import { ICardsCollection } from "../app/interfaces/ICardsCollection";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
-const CardsPage: NextPage = () => {
+interface Props {
+  collections: ICardsCollection[];
+}
+
+const CardsPage: NextPage<Props> = ({ collections }) => {
   const router = useRouter();
   const pageId = router.query.cardsId;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true);
   const data = useSelector(cardsState);
 
-  const collection = data.cards.filter((val) => {
-    return val.id == pageId;
-  });
-
   useEffect(() => {
-    if (collection.length > 0) {
-      dispatch(setCurrentState(collection[0]));
-      setLoading(false);
+    if (collections) {
+      dispatch(setState(collections));
     }
-  }, [collection]);
+  }, [collections]);
 
   useEffect(() => {
-    if (!loading && collection.length < 1) router.push("/");
-  }, [collection, data, loading, router]);
-  if (loading) return <p>Loading...</p>;
+    const collection = data.cards.filter((val) => {
+      return val.id == pageId;
+    });
+
+    if (data.cards.length > 0) {
+      if (collection.length > 0) {
+        dispatch(setCurrentState(collection[0]));
+        setLoading(false);
+      } else {
+        router.push("/");
+        setLoading(false);
+      }
+    }
+  }, [data]);
+
+  if (loading) return <Loading />;
 
   return (
     <div>
@@ -44,3 +60,13 @@ const CardsPage: NextPage = () => {
 };
 
 export default CardsPage;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const collections = await prisma.collections.findMany({
+    include: {
+      cards: true,
+    },
+  });
+
+  return { props: { collections } };
+};

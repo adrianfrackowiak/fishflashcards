@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { cardsState } from "../../../app/features/flashcardsSlice";
+import { cardsState } from "../../../app/features/allCardsDataSlice";
 
 export const Main = () => {
   const data = useSelector(cardsState);
-
-  console.log(data);
 
   return (
     <div className="bg-gray-50 h-screen w-full px-6 py-6">
