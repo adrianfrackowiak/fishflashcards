@@ -3,13 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBUC-CDYi4lEMWmFW8xSKc5Jl20PYtlGnM",
-  authDomain: "fishflashcards-9f596.firebaseapp.com",
-  projectId: "fishflashcards-9f596",
-  storageBucket: "fishflashcards-9f596.appspot.com",
-  messagingSenderId: "312047614793",
-  appId: "1:312047614793:web:81a41bf8da0df50133b898",
-  measurementId: "G-2GVF179J9Q",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
 };
 
 const app = initializeApp(firebaseConfig);

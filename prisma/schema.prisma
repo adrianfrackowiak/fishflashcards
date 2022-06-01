@@ -21,4 +21,6 @@ model collections {
   description String
   name        String
   cards       cards[]
+  createdBy   String
+  isPrivate   Boolean
 }
