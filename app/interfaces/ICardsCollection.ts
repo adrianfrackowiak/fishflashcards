@@ -5,4 +5,6 @@ export interface ICardsCollection {
   name: string;
   description: string;
   cards: IFlashcard[];
+  isPrivate: boolean;
+  createdBy: string;
 }
