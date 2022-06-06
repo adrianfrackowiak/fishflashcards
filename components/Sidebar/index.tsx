@@ -6,9 +6,10 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardArrowDown,
 } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useState } from "react";
+import { AuthButtons } from "./AuthButtons";
+import { Loading } from "../Loading";
 
 export const Sidebar = () => {
   const user = useSelector(userState);
@@ -32,24 +33,26 @@ export const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="mb-4">
-            <button
-              className="flex items-center text-md font-semibold"
-              onClick={() =>
-                setIsCatalogModalOpen(isCatalogModalOpen ? false : true)
-              }
-            >
-              <MdLibraryBooks className="mr-4" />
-              My catalog{" "}
-              {isCatalogModalOpen ? (
-                <MdKeyboardArrowUp className="ml-2" />
-              ) : (
-                <MdKeyboardArrowDown className="ml-2" />
-              )}
-            </button>
-          </li>
+          {user.user && (
+            <li className="mb-4">
+              <button
+                className="flex items-center text-md font-semibold"
+                onClick={() =>
+                  setIsCatalogModalOpen(isCatalogModalOpen ? false : true)
+                }
+              >
+                <MdLibraryBooks className="mr-4" />
+                My catalog{" "}
+                {isCatalogModalOpen ? (
+                  <MdKeyboardArrowUp className="ml-2" />
+                ) : (
+                  <MdKeyboardArrowDown className="ml-2" />
+                )}
+              </button>
+            </li>
+          )}
 
-          {isCatalogModalOpen && user && (
+          {isCatalogModalOpen && user.user && (
             <>
               <li className="mb-4">
                 <p className="text-xs font-semibold text-gray-600 uppercase mb-2">
@@ -102,23 +105,7 @@ export const Sidebar = () => {
               </li>
             </>
           )}
-          {user ? (
-            <li className="mt-auto">
-              <button className="text-md font-semibold flex items-center">
-                <FaUser className="mr-4" />
-                Log out
-              </button>
-            </li>
-          ) : (
-            <>
-              <li className="text-md font-semibold flex items-center">
-                Sign In
-              </li>
-              <li className="text-md font-semibold flex items-center">
-                Sign Up
-              </li>
-            </>
-          )}
+          <AuthButtons />
         </ul>
       </nav>
     </div>

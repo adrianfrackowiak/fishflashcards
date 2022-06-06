@@ -10,7 +10,7 @@ export const Main = () => {
   return (
     <div className="bg-gray-50 h-screen w-full px-6 py-6">
       <h4 className="font-semibold text-[1.25rem]">Explore collections</h4>
-      {user !== null && (
+      {user.user && (
         <>
           <h3 className="mt-10 mb-2">Your collections</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 grid-rows-1">
