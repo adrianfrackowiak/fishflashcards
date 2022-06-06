@@ -12,6 +12,8 @@ const initialState = {
     name: "",
     description: "",
     cards: [],
+    isPrivate: false,
+    createdBy: "",
   },
 } as currentcollectionState;
 

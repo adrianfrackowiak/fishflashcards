@@ -33,6 +33,8 @@ export const Flashcards = () => {
     }
   }, [data]);
 
+  console.log(data);
+
   if (loading) return <Loading />;
 
   return (
