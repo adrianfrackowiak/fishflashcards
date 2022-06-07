@@ -12,7 +12,9 @@ export const Main = () => {
       <h4 className="font-semibold text-[1.25rem]">Explore collections</h4>
       {user.user && (
         <>
-          <h3 className="mt-10 mb-2">Your collections</h3>
+          {user.user.collections.length !== 0 && (
+            <h3 className="mt-10 mb-2">Your collections</h3>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 grid-rows-1">
             {user.user?.collections.map((col, index) => {
               return (

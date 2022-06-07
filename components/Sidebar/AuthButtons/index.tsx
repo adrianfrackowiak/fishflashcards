@@ -13,8 +13,6 @@ export const AuthButtons = () => {
     auth.signOut();
   };
 
-  console.log(user.user);
-
   return (
     <>
       {user.user ? (
