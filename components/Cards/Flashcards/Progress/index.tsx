@@ -61,19 +61,11 @@ export const Progress = () => {
     }
   };
 
-  const onCardFlip = () => {
-    learnData.learnMode.cardView === "question"
-      ? dispatch(setCardView("answer"))
-      : dispatch(setCardView("question"));
-  };
-
   const handleKeypress = (e: any) => {
     if (e.code === "ArrowLeft") {
       onNextCard("study-again");
     } else if (e.code === "ArrowRight") {
       onNextCard("got-it");
-    } else if (e.code === "Space") {
-      onCardFlip();
     }
   };
 

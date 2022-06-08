@@ -31,8 +31,6 @@ export const Catalog = () => {
     }
   }, [user]);
 
-  console.log(privateCol, sharedCol);
-
   return (
     <>
       {user.user && (
