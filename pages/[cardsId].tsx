@@ -9,6 +9,14 @@ import { CardsComponent } from "../components/Cards";
 import { Loading } from "../components/Loading";
 import { ICardsCollection } from "../app/interfaces/ICardsCollection";
 import { PrismaClient } from "@prisma/client";
+import { onAuthStateChanged } from "firebase/auth";
+import {
+  logout,
+  setCollections,
+  signIn,
+  userState,
+} from "../app/features/userSlice";
+import { auth } from "../app/utils/firebase";
 const prisma = new PrismaClient();
 
 interface Props {
@@ -21,6 +29,27 @@ const CardsPage: NextPage<Props> = ({ collections }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true);
   const data = useSelector(cardsState);
+  const user = useSelector(userState);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        const usersCollection = data.cards.filter((val) => {
+          return val.createdBy === userAuth.uid;
+        });
+
+        dispatch(
+          signIn({
+            email: userAuth.email,
+            uid: userAuth.uid,
+          })
+        );
+        dispatch(setCollections(usersCollection));
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, [data]);
 
   useEffect(() => {
     if (collections) {

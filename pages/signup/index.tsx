@@ -1,8 +1,27 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../app/features/userSlice";
+import { auth } from "../../app/utils/firebase";
 import { SignUp } from "../../components/SignUp";
 
 const SignInPage: NextPage = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        router.push("/");
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   return (
     <div className="w-screen h-screen flex relative">
       <Head>
